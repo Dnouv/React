@@ -1,12 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
-class DishDetail extends Component{
-    constructor(props){
-        super(props);
-    }
 
-    renderDish(dish) {
+
+    function RenderDish({dish}) {
         if (dish != null)
             return(
                 <div>
@@ -26,7 +23,7 @@ class DishDetail extends Component{
             );
     }
 
-    renderComments(comments) {
+    function RenderComments({comments}) {
         if(comments != null){
             return (
                 <div key={comments.id}>
@@ -62,13 +59,19 @@ class DishDetail extends Component{
     
 
     
-    render(){
+    const DishDetail = (props) => {
         var dish;
-        if (this.props.selectedDish) {
+        if (props.dish) {
             dish = (
-                <div>   
-                    {this.renderComments(this.props.selectedDish.comments)}
+                <div className="container">
+                    <div>  
+                        {/* {this.renderDish(this.props.selectedDish)} */}
+                        
+                        <RenderComments comments={props.dish.comments} /> 
+                        {/* {this.renderComments(this.props.selectedDish.comments)} */}
+                    </div>
                 </div>
+                
             )
         } else {
             dish = <div></div>
@@ -76,20 +79,20 @@ class DishDetail extends Component{
     
 
         return(
-        <div className="container">
-            <div className="row"> 
-                <div className="col-12 col-md-5 m-1">
-                    {this.renderDish(this.props.selectedDish)} 
-                </div>
-                <div className="col-12 col-md-5 m-1">
-                    {dish}
+            <div className="container">
+                <div className="row"> 
+                    <div className="col-12 col-md-5 m-1">
+                        <RenderDish dish={props.dish} />
+                    </div>
+                    <div className="col-12 col-md-5 m-1">
+                        {dish}
+                    </div>
                 </div>
             </div>
-        </div>
         
         );
        
     }
-}
 
-export default DishDetail
+
+export default DishDetail;
