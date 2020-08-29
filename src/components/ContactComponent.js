@@ -2,7 +2,12 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+function Iframe(props) {
+    return (<div dangerouslySetInnerHTML={ {__html:  props.iframe?props.iframe:""}} />);
+  }
+  
 function Contact(props) {
+    const iframe = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50249473.638080865!2d-71.91100772971826!3d-39.762456974209925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xb09dff882a7809e1%3A0xb08d0a385dc8c7c7!2sAntarctica!5e0!3m2!1sen!2sin!4v1598677053193!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>';
     return(
         <div className="container">
             <div className="row">
@@ -32,6 +37,8 @@ function Contact(props) {
                 </div>
                 <div className="col-12 col-sm-6 offset-sm-1">
                     <h5>Map of our Location</h5>
+                    <Iframe iframe={iframe} />
+                    
                 </div>
                 <div className="col-12 col-sm-11 offset-sm-1">
                     <div className="btn-group" role="group">
