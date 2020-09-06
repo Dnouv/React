@@ -54,6 +54,7 @@ class Main extends Component {
     return (
       <div>
         <Header />
+        <div>
         <Switch>
             <Route path="/home" component={Homepage} />
             <Route exact path="/menu" component={() => <Menu dishes={this.props.dishes} />} />
@@ -62,6 +63,7 @@ class Main extends Component {
             <Route exact path="/aboutus" component={RenderLeader} />
             <Redirect to="/home" />
         </Switch>
+        </div>
         <Footer />
       </div>
     );
