@@ -184,7 +184,6 @@ class Contact extends Component {
                                     <Input type="email" id="email" name="email"
                                         placeholder="Email"
                                         value={this.state.email}
-                                        value={this.state.email}
                                         valid={errors.email === ''}
                                         invalid={errors.email !== ''}
                                         onChange={this.handleInputChange}
