@@ -3,6 +3,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbIte
         Button, Modal, ModalBody, Label, Col, Row, ModalHeader} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, Errors, LocalForm} from 'react-redux-form';
+import { addComment } from '../redux/ActionCreators';
 
 const required = (val) => val && (val.length);
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -46,7 +47,10 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
         }
 
         handleSubmit(values){
-            alert('Current state is: ' + JSON.stringify(values));
+            this.toggleModal();
+            // alert('Current state is: ' + JSON.stringify(values));
+            this.props.addComment(this.props.dishId, values.rating, values.author,
+                 values.comments);
         }
 
         // handleChange(event){
@@ -144,7 +148,7 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
     
 
 
-    function RenderComments({comments}) {
+    function RenderComments({comments, addComment, dishId}) {
         if(comments != null){
             return (
                 <>
@@ -166,7 +170,7 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
                     )
                     )}
                 </div>
-                <CommentForm />
+                <CommentForm addComment={addComment} dishId={dishId}  />
                 </>
             );
         }
@@ -199,7 +203,8 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
                     <RenderDish dish={props.dish} />
                 </div>
                 <div className="col-12 col-md-5 m-1">
-                    <RenderComments comments={props.comments} />
+                    <RenderComments comments={props.comments} addComment={props.addComment}
+                     dishId={props.dish.id} />
                 </div>
             </div>
             </div>       
