@@ -30,7 +30,6 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
         constructor(props){
             super(props);
             this.state = {
-                value: '1',
                 isModalOpen: false
             };
             this.toggleModal = this.toggleModal.bind(this);
@@ -46,7 +45,7 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
         handleSubmit(values){
             this.toggleModal();
             // alert('Current state is: ' + JSON.stringify(values));
-            this.props.addComment(this.props.dishId, values.rating, values.author,
+            this.props.postComment(this.props.dishId, values.rating, values.author,
                  values.comments);
         }
 
@@ -139,7 +138,7 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
     
 
 
-    function RenderComments({comments, addComment, dishId}) {
+    function RenderComments({comments, postComment, dishId}) {
         if(comments != null)
             return (
                 <div className="col-12 col-md-5 m-1">
@@ -160,7 +159,7 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
                         );
                                 })}
                     </ul>
-                    <CommentForm addComment={addComment} dishId={dishId}  />
+                    <CommentForm postComment={postComment} dishId={dishId}  />
                 </div>
             );
             else{
@@ -210,7 +209,7 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
                     <div className="col-12 col-md-5 m-1">
                         <RenderDish dish={props.dish} />
                     </div>
-                    <RenderComments comments={props.comments} addComment={props.addComment}
+                    <RenderComments comments={props.comments} postComment={props.postComment}
                             dishId={props.dish.id} />
                 </div>
                 </div>    
