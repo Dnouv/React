@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { Control, Errors, LocalForm} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
+
 
 const required = (val) => val && (val.length);
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -14,6 +16,11 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
 
             return(
                 <div>
+                    <FadeTransform
+                        in
+                        transformProps={{
+                            exitTransform: 'scale(0.5) translateY(-50%)'
+                        }}>
                     <Card>
                         <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
                         <CardBody>
@@ -21,6 +28,7 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
                             <CardText>{dish.description}</CardText>
                         </CardBody>
                     </Card>
+                    </FadeTransform>
                 </div>
                 
             );
@@ -144,8 +152,10 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
                 <div className="col-12 col-md-5 m-1">
                     <h4>Comments</h4>
                     <ul className="list-unstyled">
+                        <Stagger in>
                     {comments.map((comment) => {
                         return(
+                            <Fade in>
                             <li key={comment.id}>
                                 <p>{comment.comment}</p>
                                 <p>-- {comment.author} , 
@@ -156,8 +166,10 @@ const minLength = (len) => (val) => !(val) || (val.length >= len);
                                     }).format(Date.parse(comment.date))}
                                 </p>
                             </li>
+                            </Fade>
                         );
                                 })}
+                        </Stagger>
                     </ul>
                     <CommentForm postComment={postComment} dishId={dishId}  />
                 </div>
